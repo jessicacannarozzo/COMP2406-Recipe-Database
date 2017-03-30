@@ -1,5 +1,11 @@
+/************************/
+/*      COMP2406 A4     */
+/*     Author: Jess     */
+/*    S/N: 101007447 	 	*/
+/************************/
+
 body{
-	background-color:#333;  
+	background-color:#333;
 	color:white;
 }
 
@@ -16,11 +22,11 @@ button{
 #recipeViewButton{
 	background-color:#9f9;
 }
-#recipeSubmitButton{ 
+#recipeSubmitButton{
 	background-color:#99f;
 }
 
-form{ 
+form{
 	border:solid 2px silver;
 	border-radius: 10px;
 	padding: 5px;
@@ -32,4 +38,3 @@ form{
 .check{
 	color:#0f0;
 }
-

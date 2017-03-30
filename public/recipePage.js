@@ -1,3 +1,9 @@
+/************************/
+/*      COMP2406 A4     */
+/*     Author: Jess     */
+/*    S/N: 101007447 	 	*/
+/************************/
+
 //Client-side interaction controller for Recipe Display page
 //Made for Comp2406 Winter 2017 - Assignment 4
 //Author: Andrew Runka
@@ -7,29 +13,29 @@ $(document).ready(function(){
 	//register two buttons
 	$("#recipeViewButton").click(viewRecipe);
 	$("#recipeSubmitButton").click(sendRecipe);
-	
+
 	getRecipeList();
 });
 
 
 	//populate the recipe list dropdown by requesting data from the server
-	//adds a bunch of: <option value="recipe_name.json">recipe name</option>	
+	//adds a bunch of: <option value="recipe_name.json">recipe name</option>
 function getRecipeList(){
 	console.log("Requesting all recipe names");
-	
+
 	//request list of names
-	$.ajax({method: "GET", 
+	$.ajax({method: "GET",
 				url: "/recipes",
 				dataType:"json",
 				success:function(data){
 					//data is expected to an object like...
 					//{names: [name1, name2, ...]}
-								
+
 					if(data.names && data.names.length>0){  //non empty list?
-						
+
 						var $dropdown = $("#recipeSelect");
 						$dropdown.html('');//clear dropdown
-						
+
 						//populate dropdown
 						for(var i=0;i<data.names.length;i++){
 							$dropdown.append("<option value='"+data.names[i]+"'>"
@@ -44,7 +50,7 @@ function getRecipeList(){
 //Sends a request to the server for the currently selected recipe (in the recipeSelect dropdown)
 //If successfull will populate the other fields on the page with the recipe data
 function viewRecipe(){
-	
+
 	var name = $("#recipeSelect option:selected").val();  //get the value of the selected option from recipeSelect
 	console.log("Requesting recipe: "+name);
 	//fetch and load the recipe
@@ -53,8 +59,8 @@ function viewRecipe(){
 				dataType:"json",
 				success: function(data){
 					console.log("Loading recipe into form: ",data);
-					
-					//fill in form		
+
+					//fill in form
 					$("#recipeName").val(data.name.split("_").join(" "));
 					$("#recipeDuration").val(data.duration);
 					$("#recipeIngredients").val(data.ingredients.join("\n"));
@@ -66,13 +72,13 @@ function viewRecipe(){
 }
 
 
-//Sends a POST request to the server to add/update a recipe to the 
+//Sends a POST request to the server to add/update a recipe to the
 //database. Note: contents are not checked for safety!
 //Note: recipe names are stored with underscores in place of spaces.
 //			but this is done transparently to the client.
 function sendRecipe(){
 	console.log("Sending new recipe");
-	
+
 	//get recipe from page
 	var recipe = {
 		name: $("#recipeName").val().split(" ").join("_"),
@@ -81,7 +87,7 @@ function sendRecipe(){
 		directions: $("#recipeDirections").val().split("\n"),
 		notes: $("#recipeNotes").val()
 	}
-	
+
 	//send recipe
 	$.ajax({method:"POST",
 				url:"/recipe",
