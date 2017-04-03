@@ -4,4 +4,22 @@
 //- /*    S/N: 101007447 	 	*/
 //- /************************/
 
-h1= hello fUCK
+doctype html
+
+html
+  head
+    script(src="recipePage.js")
+    style
+      include style.css
+
+  body
+    h1 COMP2406 Recipe Database
+
+    form(method='POST' action='/login')
+      fieldset
+        legend Select a recipe!
+        <p>
+            label Recipe:
+            select(id="recipeSelect")
+        </p>
+        button.btn("id=recipeViewButton")="View"
