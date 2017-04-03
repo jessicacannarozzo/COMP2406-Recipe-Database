@@ -8,9 +8,10 @@ doctype html
 
 html
   head
-    script(src="recipePage.js")
+    script(src="./recipePage.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
     style
-      include style.css
+      include ./style.css
 
   body
     h1 COMP2406 Recipe Database
@@ -20,6 +21,45 @@ html
         legend Select a recipe!
         <p>
             label Recipe:
-            select(id="recipeSelect")
+            select#recipeSelect(name="recipe")
+              option FUCK
         </p>
         button.btn("id=recipeViewButton")="View"
+
+    br
+    form
+      label Name:
+      br
+      input#recipeName
+    
+      br
+      br
+      
+      label Duration:
+      br
+      input#recipeDuration
+      
+      br
+      br
+      
+      label Ingredients:
+      br
+      input#recipeIngredients
+      
+      br
+      br
+
+      label Steps:
+      br
+      input#recipeDirections
+      
+      br
+      br
+
+      label Notes:
+      br
+      input#recipeNotes
+
+      br
+      br
+      button.btn("id=recipeSubmitButton")="Submit"

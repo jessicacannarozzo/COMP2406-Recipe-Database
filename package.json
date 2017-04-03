@@ -13,7 +13,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.15.1",
     "hat": "0.0.3",
-    "mongodb": "^2.2.24",
+    "mongodb": "^2.2.25",
     "pug": "^2.0.0-beta11"
   }
 }
