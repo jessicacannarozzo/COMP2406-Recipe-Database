@@ -13,8 +13,11 @@ var cookieParser = require('cookie-parser');
 
 var db;
 
-app.set('views','./public');
+app.set('views','./views');
 app.set('view engine','pug');
+
+//function executed every time the app object receives a request
+app.use(express.static("./public"));
 
 app.get("/recipes", function(req, res) {
 	res.send("Lol");
