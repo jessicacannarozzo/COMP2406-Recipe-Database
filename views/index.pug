@@ -8,6 +8,7 @@ doctype html
 
 html
   head
+    title COMP2406 Recipe Database
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
     script(src="./recipePage.js")
     style
@@ -21,42 +22,42 @@ html
       p
           label Recipe:
           select#recipeSelect(name="recipe")
-            option FUCK
-      button.btn("id=recipeViewButton")="View"
+            option 
+      button#recipeViewButton View
 
     br
     label Name:
     br
-    input#recipeName
+    input(name='recipeName')#recipeName
   
     br
     br
     
     label Duration:
     br
-    input#recipeDuration
+    input(name='recipeDuration')#recipeDuration
     
     br
     br
     
     label Ingredients:
     br
-    input#recipeIngredients
+    textarea(name='recipeIngredients')#recipeIngredients
     
     br
     br
 
     label Steps:
     br
-    input#recipeDirections
+    textarea(name='recipeDirections')#recipeDirections
     
     br
     br
 
     label Notes:
     br
-    input#recipeNotes
+    textarea(name='recipeNotes')#recipeNotes
 
     br
     br
-    button.btn("id=recipeSubmitButton")="Submit"
+    button#recipeSubmitButton Submit
