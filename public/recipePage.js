@@ -30,7 +30,6 @@ function getRecipeList(){
 				success:function(data){
 					//data is expected to an object like...
 					//{names: [name1, name2, ...]}
-
 					if(data.names && data.names.length>0){  //non empty list?
 
 						var $dropdown = $("#recipeSelect");

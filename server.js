@@ -12,6 +12,8 @@ var hat = require('hat');
 var cookieParser = require('cookie-parser');
 
 var db;
+var recipeList = [];
+recipeList.names = [];
 
 app.set('views','./views');
 app.set('view engine','pug');
@@ -19,24 +21,36 @@ app.set('view engine','pug');
 //function executed every time the app object receives a request
 app.use(express.static("./public"));
 
+//send recipe list
 app.get("/recipes", function(req, res) {
-	mongo.connect("mongodb://localhost:27017/recipeDB",function(err,database){
-		if(err)throw err;
-		app.listen(2406,function(){console.log("Server is alive!!");});
-		db = database; //store the connection (pool)
-	});
+	// mongo.connect("mongodb://localhost:27017/recipeDB",function(err,database){
+	// 	if(err)throw err;
+	// 	db = database; //store the connection (pool)
+	// 	var cursor = db.collection("recipes").find();
+	// 	db.close();
+	// 	console.log(recipeList.names);
+	// 	res.end(recipeList.names);
+	// });
+// console.log(recipeList);
+	res.writeHead(200, {"Content-Type" : 'application/json'});
+	res.end(JSON.stringify(recipeList));
 });
 
 app.use("/recipe",bodyParser.urlencoded({extended:true}));
 
+//post/save a new recipe
 app.post("/recipe", function(req, res) {
-	var recipe;
+	var recipe = new Recipe(req.body.name, req.body.duration, req.body.ingredients, req.body.directions, req.body.notes);
+	recipeList.names.push(req.body.name);
 
-	// console.log(req.body);
-	db.collection("recipeDB").insert(recipe, function(err, result) {
-		if (err) res.sendStatus(500); //internal server error/
-		// else if () //400, data missing
-		else res.sendStatus(200); //OK, success.
+	mongo.connect("mongodb://localhost:27017/recipeDB",function(err,db){
+		if(err)throw err;
+		db.collection("recipes").update({name:req.body.name},req.body,{upsert:true, w: 1}, function(err, result) {
+			if (err) res.sendStatus(500); //internal server error/
+			// else if () //400, data missing
+			else res.sendStatus(200); //OK, success.
+			db.close();
+		});
 	});
 });
 
@@ -55,7 +69,7 @@ app.get("/", function(req,res){
 
 app.listen(2406,function(){console.log("Server listening on port 2406");});
 
-function recipe(name, duration, ingredients, directions, notes) { //create a recipe obj
+function Recipe(name, duration, ingredients, directions, notes) { //create a recipe obj
 	this.name = name;
 	this.duration = duration;
 	this.ingredients = ingredients;

@@ -19,4 +19,5 @@ Set-Up and Run instructions:
 
 Citations List:
 	Andrew Runka, COMP2406 Winter 2017
-	http://stackoverflow.com/questions/10151837/submit-jade-form
+	Server.js: https://docs.mongodb.com/manual/reference/method/db.collection.update/
+	Server.js: https://expressjs.com/en/guide/database-integration.html#mongo
