@@ -55,7 +55,7 @@ app.post("/recipe", function(req, res) {
 
 	db.collection("recipes").update({name: recipe.name}, recipe,{upsert:true, w: 1}, function(err, result) {
 		if (err) res.sendStatus(500); //internal server error/
-		// else if () //400, data missing
+		else if (!recipe.name) res.sendStatus(400); //400, data missing
 		else res.sendStatus(200); //OK, success.
 	});
 });
