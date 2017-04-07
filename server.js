@@ -11,8 +11,7 @@ var bodyParser = require('body-parser');
 var hat = require('hat');
 var cookieParser = require('cookie-parser');
 
-var db;
-var recipeList = [];
+var recipeList = {};
 recipeList.names = [];
 
 app.set('views','./views');
@@ -23,17 +22,18 @@ app.use(express.static("./public"));
 
 //send recipe list
 app.get("/recipes", function(req, res) {
-	// mongo.connect("mongodb://localhost:27017/recipeDB",function(err,database){
-	// 	if(err)throw err;
-	// 	db = database; //store the connection (pool)
-	// 	var cursor = db.collection("recipes").find();
-	// 	db.close();
-	// 	console.log(recipeList.names);
-	// 	res.end(recipeList.names);
-	// });
-// console.log(recipeList);
+	recipeList.names = [];
 	res.writeHead(200, {"Content-Type" : 'application/json'});
-	res.end(JSON.stringify(recipeList));
+	mongo.connect("mongodb://localhost:27017/recipeDB",function(err,database){
+		if(err)throw err;
+		db = database; //store the connection (pool)
+		db.collection("recipes").find().each(function(err, u) {
+			if (!u) {
+				db.close();
+				res.end(JSON.stringify(recipeList));
+			} else recipeList.names.push(u.name);
+		});
+	});
 });
 
 app.use("/recipe",bodyParser.urlencoded({extended:true}));
@@ -41,7 +41,6 @@ app.use("/recipe",bodyParser.urlencoded({extended:true}));
 //post/save a new recipe
 app.post("/recipe", function(req, res) {
 	var recipe = new Recipe(req.body.name, req.body.duration, req.body.ingredients, req.body.directions, req.body.notes);
-	recipeList.names.push(req.body.name);
 
 	mongo.connect("mongodb://localhost:27017/recipeDB",function(err,db){
 		if(err)throw err;

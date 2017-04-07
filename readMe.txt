@@ -19,5 +19,6 @@ Set-Up and Run instructions:
 
 Citations List:
 	Andrew Runka, COMP2406 Winter 2017
-	Server.js: https://docs.mongodb.com/manual/reference/method/db.collection.update/
-	Server.js: https://expressjs.com/en/guide/database-integration.html#mongo
+	server.js: https://docs.mongodb.com/manual/reference/method/db.collection.update/
+	server.js: https://expressjs.com/en/guide/database-integration.html#mongo
+	server.js: http://stackoverflow.com/questions/23676205/how-to-return-only-value-of-a-field-in-mongodb
