@@ -8,7 +8,7 @@ Author:
 Description:
 	OS developed in: Ubuntu GNOME 16.0.4
 	Browser used for testing: Chromium-browser (Google Chrome) 55.0.2883.87
-	This application is a chat room where members can send and receive public and private messages.
+	This application is a recipe database where users can save new recipes and load old ones.
 
 
 Set-Up and Run instructions:
