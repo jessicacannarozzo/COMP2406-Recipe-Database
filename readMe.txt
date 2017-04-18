@@ -2,7 +2,7 @@ COMP2406 A4: Recipe Database
 
 
 Author:
-	Jess Cannarozzo (S/N: 101007447)
+	Jess Cannarozzo
 
 
 Description:
